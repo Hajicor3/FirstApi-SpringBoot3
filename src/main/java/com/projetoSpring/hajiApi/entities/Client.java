@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,7 +19,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Entity (name = "tb_users")
+@Entity
+@Table(name = "tb_client") //Lembrar de colocar esta correção no commit.
 public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
 
