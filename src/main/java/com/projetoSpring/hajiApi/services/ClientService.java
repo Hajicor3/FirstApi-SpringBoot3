@@ -23,6 +23,13 @@ public class ClientService {
 	public ClientDTO findById(Long id){
 		Client result = clientRepository.findById(id).get();
 		return new ClientDTO(result);
-		
+	}
+	
+	public Client addClient(Client obj) {
+		return clientRepository.save(obj);
+	}
+	
+	public void deleteById(Long id) {
+		clientRepository.deleteById(id);
 	}
 }

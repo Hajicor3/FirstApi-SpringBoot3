@@ -3,6 +3,8 @@ package com.projetoSpring.hajiApi.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-@Table(name = "tb_client") //Lembrar de colocar esta correção no commit.
+@Table(name = "tb_client") 
 public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,6 +36,8 @@ public class Client implements Serializable {
 	private String phoneNumber;
 	private String adress;
 	private String cep;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 	
 }
