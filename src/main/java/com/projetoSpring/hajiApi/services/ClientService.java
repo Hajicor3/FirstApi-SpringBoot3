@@ -39,12 +39,14 @@ public class ClientService {
 	}
 	
 	@Transactional
-	public void updateClient(Long id, Client obj) {
+	public Client updateClient(Long id, Client obj) {
 		Client old = clientRepository.getReferenceById(id);
 		updateData(obj,old);
+		return clientRepository.save(old);
 		
 	}
 	
+	@Transactional
 	private void updateData(Client update, Client old ) {
 		
 		old.setName(update.getName());
@@ -53,5 +55,6 @@ public class ClientService {
 		old.setPhoneNumber(update.getPhoneNumber());
 		old.setPassword(update.getPassword());
 		old.setEmail(update.getEmail());
+		old.setBirthDate(update.getBirthDate());
 	}
 }
