@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projetoSpring.hajiApi.dto.ClientDTO;
 import com.projetoSpring.hajiApi.entities.Client;
 import com.projetoSpring.hajiApi.repositories.ClientRepository;
+import com.projetoSpring.hajiApi.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClientService {
@@ -24,7 +25,7 @@ public class ClientService {
 	
 	@Transactional(readOnly = true)
 	public ClientDTO findById(Long id){
-		Client result = clientRepository.findById(id).get();
+		Client result = clientRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
 		return new ClientDTO(result);
 	}
 	
