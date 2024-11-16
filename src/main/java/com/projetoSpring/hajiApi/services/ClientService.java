@@ -11,6 +11,8 @@ import com.projetoSpring.hajiApi.entities.Client;
 import com.projetoSpring.hajiApi.repositories.ClientRepository;
 import com.projetoSpring.hajiApi.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ClientService {
 	
@@ -36,14 +38,23 @@ public class ClientService {
 	
 	@Transactional
 	public void deleteById(Long id) {
+		
+		if(!clientRepository.existsById(id)) {
+			throw new ResourceNotFoundException(id);
+		}
 		clientRepository.deleteById(id);
 	}
 	
 	@Transactional
 	public Client updateClient(Long id, Client obj) {
+		try {
 		Client old = clientRepository.getReferenceById(id);
 		updateData(obj,old);
 		return clientRepository.save(old);
+		}
+		catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 		
 	}
 	
